@@ -7,14 +7,14 @@ public:
 	int data;
 	Node *next;
 
-}*head;
+}*head,*last;
 
 void initialize(int n){
-	
+	head=new Node;
 	cin>>head->data;
 	head->next=NULL;
 	Node *p;
-	Node *last=head;
+	last=head;
 	int i=1;
 
 	while(i++<n){
@@ -24,9 +24,10 @@ void initialize(int n){
 		last->next=p;
 		last=p;
 	}
+	
 }
 
-int display(){
+int display(Node *head){
 	Node *p=head;
 	cout<<endl<<"the elements are: ";
 	int i=0;
@@ -99,7 +100,7 @@ int search_transposition(){
 }
 
 void insert(){
-	int c=display();
+	int c=display(head);
 	cout<<endl<<"1. At beginning";
 	cout<<endl<<"2. At given position";
 	string s="y";
@@ -116,7 +117,7 @@ void insert(){
 						cin>>t->data;
 						t->next=head;
 						head=t;
-						c=display();
+						c=display(head);
 					}
 						break;
 			case 2:{
@@ -255,25 +256,121 @@ void naive_reverse(int c){
 
 
 }
+
+void reverse_sliding(){
+	cout<<endl<<"Reverse of the given list is:-";
+	Node *p=head;
+	Node *q=NULL,*r=NULL;
+
+	while(p){
+		r=q;
+		q=p;
+		p=p->next;
+		q->next=r;
+	}
+	head = q;
+
+}
+
+void recursive_reverse(Node *q,Node *p){
+	
+	
+	if(p){
+		recursive_reverse(p,p->next);
+		p->next=q;
+	}
+	else{
+		head = q;
+		cout<<endl<<"The reverse of given list is:- ";
+	}
+
+}
+
+void concatenate(Node *first,Node *second){
+	
+	
+	Node *p=first;
+	while(p->next){
+		p=p->next;
+	}
+	p->next=second;
+	second=NULL;
+	head=first;
+	
+
+}
+//1 3 5
+//2 4 6
+void merge(Node *f,Node *s){
+	Node *third;
+	Node *last;
+		
+			if(f->data<s->data){
+				third=last=f;
+				f=f->next;
+				last->next=NULL;
+				
+			}
+			else{
+				third=last=s;
+				s=s->next;
+				last->next=NULL;
+				
+			}
+		
+	while(f&&s)
+	{
+		if(f->data<s->data){
+			last->next=f;
+			last=f;
+			f=f->next;
+			last->next=NULL;
+		}
+		else{
+			last->next=s;
+			last=s;
+			s=s->next;
+			last->next=NULL;
+		}
+
+	}
+	if(f)
+		last->next=f;
+	else
+		last->next=s;
+	head=third;
+}
+
+bool isLoop(Node *head){
+	Node *p=head;
+	Node *q=NULL;
+	while(p&&q){
+		if(p==q)
+			return true;
+		p=p->next;
+		q=q->next;
+		q=q->next;
+
+	}
+	return false;
+}
 int main(){
 	//Your code here
 	int n;
-	head=new Node;
-	head->next=NULL;
-	// Node *p=head; 
+	Node *first,*fl;
+	
 	cout<<endl<<"Enter the no. of elements you want to insert: ";
 	cin>>n;
 	//int i=0;
 	if(n>0){
 			cout<<endl<<"Enter the elements: ";
 			
-			initialize(n);}
-	// while(i++<n){
-	// 	cout<<endl<<"Enter the "<<i<<" element: ";
-	// 	p=initialize(p);
-	// 	p->next=0;
-	// }
-	int c=display();	
+		initialize(n);
+		first=head;
+		fl=last;
+	}
+	
+	int c=display(first);	
 	cout<<endl<<"Number of nodes - "<<c;
 	// cout<<endl<<"The sum is: "<<sum();
 
@@ -312,7 +409,34 @@ int main(){
 
 	//remove_duplicate(c);
 
-	naive_reverse(c);
-	int co=display();
+	//naive_reverse(c);
+	
+	//reverse_sliding();
+
+	//recursive_reverse(NULL,first);
+
+	//TWO LISTS REQUIRED!
+
+	cout<<endl<<"Enter the length of second list: ";
+	cin>>n;
+	cout<<endl<<"Enter the elements: ";
+	initialize(n);
+	Node *second=head,*sl=last;
+
+	//concatenate(first,second);
+
+	//merge(first,second);
+
+	Node *p=head;
+	int i=1;
+	while(i++<2){
+		p=p->next;
+	}
+	sl->next=p;
+	if(isLoop(second))
+		cout<<endl<<"List is looped";
+	else
+		cout<<endl<<"List is linear";
+	int co=display(head);
 	return 0;
 }
