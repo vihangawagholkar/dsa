@@ -343,13 +343,14 @@ void merge(Node *f,Node *s){
 
 bool isLoop(Node *head){
 	Node *p=head;
-	Node *q=NULL;
+	Node *q=head;
 	while(p&&q){
-		if(p==q)
-			return true;
 		p=p->next;
 		q=q->next;
+		if(q)
 		q=q->next;
+		if(p==q)
+			return true;
 
 	}
 	return false;
@@ -432,11 +433,16 @@ int main(){
 	while(i++<2){
 		p=p->next;
 	}
-	sl->next=p;
-	if(isLoop(second))
-		cout<<endl<<"List is looped";
-	else
-		cout<<endl<<"List is linear";
-	int co=display(head);
+	// sl->next=p;
+	// if(isLoop(second))
+	// 	cout<<endl<<"List is looped";
+	// else
+	// 	cout<<endl<<"List is linear";
+
+
+
+	//int co=display(head);
+	
+	//GOOD JOB
 	return 0;
 }
