@@ -438,6 +438,11 @@ int main(){
 	// 	cout<<endl<<"List is looped";
 	// else
 	// 	cout<<endl<<"List is linear";
+
+
+
 	//int co=display(head);
+	
+	//GOOD JOB
 	return 0;
 }
