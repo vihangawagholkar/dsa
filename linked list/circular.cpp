@@ -41,12 +41,15 @@ public:
 	void display(){
 		Node *p=head;
 		cout<<endl<<"The elements are: ";
+		int i=0;
 		do{
 
 			cout<<p->data<<" ";
 			p=p->next;
+			i++;
 		}
 		while(p!=head);
+		n=i;
 	}
 	// void display(Node *p){
 	// 	static int flag=0;
@@ -59,7 +62,9 @@ public:
 	// 	}
 	// 	flag=0;
 	// }
-	
+	int getLength(){
+		return n;
+	}
 	void insert(){
 		int pos,x;
 
@@ -94,19 +99,56 @@ public:
 				cout<<endl<<"Invalid position!";
 		
 	}
-	~CircularLinkedList(){
+
+	void Delete(){
+		int pos,x;
+		Node *p=head;
 		
+		cout<<endl<<"Enter the position of node you want to delete: ";
+		cin>>pos;
+		if(pos==1){
+			do{
+				p=p->next;
+
+			}
+			while(p->next!=head);
+			p->next=head->next;
+			delete head;
+			head=p->next;
+		}
+		else if(pos<=n&&pos>1){
+			Node *q=NULL;
+			int i=0;
+			do{
+				
+				p=p->next;
+
+			}
+			while(i++<=pos);
+			q=p->next;
+			p->next=q->next;
+			x=q->data;
+			delete q;
+		}
+		else
+			cout<<endl<<"Invalid position!";
+	}
+	~CircularLinkedList(){
+			
 	}
 };
 
 
 int main(){
 	//Your code here
-	CircularLinkedList l1;
+	CircularLinkedList l1;					
 	l1.display();
-
 	cout<<endl<<"Enter the element and position you want to insert: ";
 	l1.insert();
 	l1.display();
+	cout<<endl<<"The no. of nodes are: "<<l1.getLength();
+	l1.Delete();
+	l1.display();
+	cout<<endl<<"The no. of nodes are: "<<l1.getLength();
 	return 0;
 }
