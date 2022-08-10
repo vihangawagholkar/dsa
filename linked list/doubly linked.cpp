@@ -45,6 +45,8 @@ public:
 		}
 		if(last->next){
 					last=last->next;}
+		
+		
 		length=i;
 		
 		}
@@ -62,15 +64,7 @@ public:
 		}
 
 	}
-	void revdisplay(){
-		cout<<endl<<"The elements in reverse are: ";
-		countNodes();
-		Node *p=last;
-		while(p){
-			cout<<p->data<<" ";
-			p=p->prev;
-		}
-	}
+	
 
 	void insert(){
 		int pos,x;
@@ -112,14 +106,64 @@ public:
 		}
 
 	}
+
+	void Delete(){
+		int pos,x;
+		cout<<endl<<"Enter the position of node to be deleted: ";
+		cin>>pos;
+		Node *p=head;
+		if(pos<=1){
+			x=head->data;
+			
+
+			head=head->next;
+			delete p;
+			if(head)
+				head->prev=NULL;
+			length--;
+		}
+		else{
+			int i=0;
+			while(i++<pos-1&&p->next){
+				p=p->next;
+			}
+			x=p->data;
+			p->prev->next=p->next;
+			if(p->next){
+				p->next->prev=p->prev;
+
+			}
+			
+			delete p;
+			length--;
+		}
+	}
+
+	void reverse(){
+		cout<<endl<<"List reversed.";
+		Node *p=head;
+		Node *temp;
+		while(p){
+			temp=p->next;
+			p->next=p->prev;
+			p->prev=temp;
+			p=p->prev;
+			if(p!=NULL&&p->next==NULL)
+				head=p;
+		}
+	}
 };
 int main(){
 	//Your code here
 	DoublyLinked d1;
 	d1.display();
-	d1.insert();
-	
-	d1.revdisplay();
+	//d1.insert();
+	//d1.Delete();
+	//d1.revdisplay();
+	// d1.reverse();
+	// d1.display();
+	d1.reverse();
+	d1.display();
 	cout<<endl<<"The number of nodes are: "<<d1.getLength();
 	return 0;
 }
