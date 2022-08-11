@@ -1,2 +1,0 @@
-# dsa
-My dosa journey
