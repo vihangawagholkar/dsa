@@ -22,10 +22,11 @@ public:
 		cin>>head->data;
 		int i=1;
 		Node *p;
+		last->next=p;
 		while(i++<length){
 			p=new Node;
 			cin>>p->data;
-			p->prev=head;
+			p->prev=last;
 			last->next=p;
 
 			last=p;
@@ -43,7 +44,7 @@ public:
 			cout<<p->data<<" ";
 			p=p->next;
 		}while(p!=head);
-		cout<<endl;
+		
 		
 		
 	}
@@ -81,13 +82,50 @@ public:
 			p->next=t;
 			length++;
 		}
+	}
+
+	void Delete(){
+		int pos,x;
+		cout<<endl<<"Enter the position of the element you want to delete: ";
+		cin>>pos;
+		if(pos<=1){
+			Node *p=head;
+			head->next->prev=head->prev;
+			head->prev->next=head->next;
+			head = head->next;
+			x=head->data;
+			delete p;
+			length--;
+		}
+		else{
+			Node *p=head;
+			
+			int i=0;
+			while(i++<pos-1&&p->next!=head){
+
+				p=p->next;
+
+			}
+			head->prev=p->prev;
+			p->prev->next=head;
+			p->prev->next=p->next;
+			p->next->prev=p->prev;
+									
+
+			x=p->data;
+
+			delete p;
+			
+			length--;
+		}
 	}	
 };
 int main(){
 	//Your code here
 	DoublyCircularLinked l1;
 	l1.display();
-	l1.insert();
+	//l1.insert();
+	l1.Delete();
 	l1.display();
 	return 0;
 }
