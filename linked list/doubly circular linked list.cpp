@@ -48,6 +48,8 @@ public:
 		
 	}
 
+	
+
 	void insert(){
 		int pos,x;
 		cout<<endl<<"Enter the position and the element you want to insert in: ";
@@ -57,7 +59,8 @@ public:
 			t->data=x;
 			t->next=head;
 			t->prev=head->prev;
-			head->prev=t;
+
+			head->prev->next=t;
 			head=t;
 			length++;
 
@@ -67,24 +70,24 @@ public:
 			Node *p=head;
 			Node *t=new Node;
 			t->data=x;
-			while(i++<pos-1){
+			while(i++<pos-1&&p->next!=head){
 				p=p->next;
 			}
 			t->next=p->next;
 			t->prev=p;
-			if(p->next==head){
+			if(p->next!=head){
 				p->next->prev=t;
 			}
 			p->next=t;
 			length++;
 		}
-	}
+	}	
 };
 int main(){
 	//Your code here
 	DoublyCircularLinked l1;
+	l1.display();
 	l1.insert();
 	l1.display();
-	
 	return 0;
 }
