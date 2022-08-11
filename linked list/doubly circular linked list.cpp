@@ -124,7 +124,8 @@ int main(){
 	//Your code here
 	DoublyCircularLinked l1;
 	l1.display();
-	//l1.insert();
+	l1.insert();
+	l1.display();
 	l1.Delete();
 	l1.display();
 	return 0;
