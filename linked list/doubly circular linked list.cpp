@@ -67,7 +67,7 @@ public:
 
 		}
 		else if(pos>0){
-			int i=0;
+			int i=1;
 			Node *p=head;
 			Node *t=new Node;
 			t->data=x;
@@ -76,9 +76,9 @@ public:
 			}
 			t->next=p->next;
 			t->prev=p;
-			if(p->next!=head){
+			
 				p->next->prev=t;
-			}
+			
 			p->next=t;
 			length++;
 		}
