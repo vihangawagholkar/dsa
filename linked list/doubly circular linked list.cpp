@@ -106,8 +106,8 @@ public:
 				p=p->next;
 
 			}
-			head->prev=p->prev;
-			p->prev->next=head;
+			
+			
 			p->prev->next=p->next;
 			p->next->prev=p->prev;
 									
