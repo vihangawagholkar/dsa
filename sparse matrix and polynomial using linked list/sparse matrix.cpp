@@ -8,13 +8,6 @@ public:
 	int col;
 	Node *next;
 };
-// class element{
-// public:
-// 	int data;
-// 	int col;
-// 	int row;
-// 	element *next;
-// };
 
 class Matrix:public Node{
 int m,n,num;
@@ -52,7 +45,7 @@ public:
 
 			
 		}
-		cout<<A[0]->data;
+		
 
 	}
 
