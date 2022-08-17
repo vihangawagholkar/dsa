@@ -81,11 +81,11 @@ int isBalanced(char* exp){
             else{
                 x=stk.pop();
 
-<<<<<<< HEAD
-                if(exp[i]-x==1)
-=======
+
+               
+
                 if(exp[i]-x<=2)
->>>>>>> parenthesis-matching
+
                     continue;
                 
                 else
