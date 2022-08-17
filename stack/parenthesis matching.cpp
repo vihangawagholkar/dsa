@@ -81,7 +81,9 @@ int isBalanced(char* exp){
             else{
                 x=stk.pop();
 
-                if(exp[i]-x==1)
+
+                if(exp[i]-x<=2)
+
                     continue;
                 
                 else
@@ -95,14 +97,14 @@ int isBalanced(char* exp){
  
  
 int main() {
- 	const int size=1000;
+    const int size=1000;
     char E[] = "";
     cout<<endl<<"Enter the equation: ";
     cin.getline(E,size);
     if(isBalanced(E))
-    	cout<<endl<<"Parentheses Matching";
+        cout<<endl<<"Parentheses Matching";
     else
-    	cout<<endl<<"Parenthesis not Matching";
+        cout<<endl<<"Parenthesis not Matching";
  
     return 0;
  
