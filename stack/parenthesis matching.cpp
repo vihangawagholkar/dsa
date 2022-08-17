@@ -68,15 +68,25 @@ int Stack::isEmpty() {
 
 int isBalanced(char* exp){
     Stack stk;
- 
+    char x;
     for (int i=0; exp[i]!='\0'; i++){
-        if (exp[i] == '('){
+        if (exp[i] == '('||exp[i] == '{'||exp[i] == '['){
             stk.push(exp[i]);
-        } else if (exp[i] == ')'){
+        } else if (exp[i] == ')'||exp[i] == '}'||exp[i] == ']'){
+            
             if (stk.isEmpty()){
                 return false;
-            } else {
-                stk.pop();
+            } 
+
+            else{
+                x=stk.pop();
+
+                if(exp[i]-x<=2)
+                    continue;
+                
+                else
+                    return false;
+                
             }
         }
     }
@@ -85,14 +95,14 @@ int isBalanced(char* exp){
  
  
 int main() {
- 	const int size=1000;
+    const int size=1000;
     char E[] = "";
     cout<<endl<<"Enter the equation: ";
     cin.getline(E,size);
     if(isBalanced(E))
-    	cout<<endl<<"Parentheses Matching";
+        cout<<endl<<"Parentheses Matching";
     else
-    	cout<<endl<<"Parenthesis not Matching";
+        cout<<endl<<"Parenthesis not Matching";
  
     return 0;
  
