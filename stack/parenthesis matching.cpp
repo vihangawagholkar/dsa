@@ -77,18 +77,13 @@ int isBalanced(char* exp){
             if (stk.isEmpty()){
                 return false;
             } 
-            else {
+
+            else{
                 x=stk.pop();
 
-                if(x=='['&&exp[i]==']')
-                    continue;
-
-                else if(x=='{'&&exp[i]=='}')
+                if(exp[i]-x==1)
                     continue;
                 
-                else if(x=='('&&exp[i]==')')
-                    continue;
-
                 else
                     return false;
                 
