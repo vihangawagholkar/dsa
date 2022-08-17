@@ -68,15 +68,30 @@ int Stack::isEmpty() {
 
 int isBalanced(char* exp){
     Stack stk;
- 
+    char x;
     for (int i=0; exp[i]!='\0'; i++){
-        if (exp[i] == '('){
+        if (exp[i] == '('||exp[i] == '{'||exp[i] == '['){
             stk.push(exp[i]);
-        } else if (exp[i] == ')'){
+        } else if (exp[i] == ')'||exp[i] == '}'||exp[i] == ']'){
+            
             if (stk.isEmpty()){
                 return false;
-            } else {
-                stk.pop();
+            } 
+            else {
+                x=stk.pop();
+
+                if(x=='['&&exp[i]==']')
+                    continue;
+
+                else if(x=='{'&&exp[i]=='}')
+                    continue;
+                
+                else if(x=='('&&exp[i]==')')
+                    continue;
+
+                else
+                    return false;
+                
             }
         }
     }
