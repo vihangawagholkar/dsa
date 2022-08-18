@@ -82,6 +82,8 @@ int isBalanced(char* exp){
                 x=stk.pop();
 
 
+               
+
                 if(exp[i]-x<=2)
 
                     continue;
