@@ -60,22 +60,40 @@ public:
 	}
 };
 int isOperand(char x){
-	if(x=='+'||x=='-'||x=='*'||x=='/')
+	if(x=='+'||x=='-'||x=='*'||x=='/'||x == '^' || x == '(' || x == ')')
 		return 0;
 	else
 		return 1;
 
 }
 
-int precedence(char x){
+int instackprecedence(char x){
+	if(x=='+'||x=='-')
+		return 2;
+	else if(x=='*'||x=='/')
+		return 4;
+	else if(x=='^')
+		return 5;
+	else if(x=='(')
+		return 0;
+	return -1;
+}
+
+int outstackprecedence(char x){
 	if(x=='+'||x=='-')
 		return 1;
 	else if(x=='*'||x=='/')
-		return 2;
-	return 0;
+		return 3;
+	else if(x=='^')
+		return 6;
+	else if(x=='(')
+		return 7;
+	else if(x==')')
+		return 0;
+	return -1;
 }
-
 //a+b*c-d/e
+//((a+b)*c)-d^e^f
 char * postfix(char exp[]){
 	stack s1;
 	char *postfix=new char[strlen(exp)+1];
@@ -85,8 +103,12 @@ char * postfix(char exp[]){
 			postfix[j++]=exp[i++];
 		}
 		else{
-			if(precedence(exp[i])>precedence(s1.stackTop())){
+			if(s1.isEmpty()||outstackprecedence(exp[i])>instackprecedence(s1.stackTop())){
 				s1.push(exp[i++]);
+			}
+			else if(outstackprecedence(exp[i])==instackprecedence(s1.stackTop())){
+				s1.pop();
+				i++;
 			}
 			else{
 				postfix[j++]=s1.pop();
