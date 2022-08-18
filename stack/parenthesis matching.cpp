@@ -104,7 +104,7 @@ int main() {
     cout<<endl<<"Enter the equation: ";
     cin.getline(E,size);
     if(isBalanced(E))
-        cout<<endl<<"Parentheses Matching";
+        cout<<endl<<"Parenthesis Matching";
     else
         cout<<endl<<"Parenthesis not Matching";
  
