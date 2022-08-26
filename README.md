@@ -1,2 +1,3 @@
 # dsa
-My dosa journey
+
+This repository contains my complete dosa journey...
