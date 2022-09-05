@@ -92,9 +92,29 @@ void preorder(Node *p){
 		preorder(p->rchild);
 	}
 }
+void inorder(Node *p){
+	if(p){
+		inorder(p->lchild);
+		cout<<p->data<<" "<<flush;
+		inorder(p->rchild);
+	}
+}
+void postorder(Node *p){
+	if(p){
+		postorder(p->lchild);
+		postorder(p->rchild);
+		cout<<p->data<<" "<<flush;
+	}
+}
+
 int main(){
 	//Your code here
 	createTree();
 	preorder(root);
+	cout<<endl;
+	inorder(root);
+	cout<<endl;
+	postorder(root);
+	cout<<endl;
 	return 0;
 }
