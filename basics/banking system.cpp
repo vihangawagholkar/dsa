@@ -14,7 +14,7 @@ class account{
 public:	
 	int acc_no;
 	string f_name,l_name;
-	int balance;
+	long long int balance;
 
 public:
 	account(string f_n="",string l_n="",int an=0,int b=0){
