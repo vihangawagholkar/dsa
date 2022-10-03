@@ -8,7 +8,7 @@ class Diag_Matrix{
 	int length;
 	public: 
 	Diag_Matrix(){
-		cout<<"Enter the dimension of your matrix: ";
+		cout<<"Enter dimension of your matrix: ";
 		cin>>length;
 		A=new int*[length];
 		for(int i=0;i<length;i++){

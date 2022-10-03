@@ -81,7 +81,7 @@ private:
 					//cout<<"In while";
 					
 					if(a==acc.getacc_no()){
-						cout<<endl<<"Enter the amount you want to deposit: ";
+						cout<<endl<<" the amount you want to deposit: ";
 						cin>>dep;
 						acc.plusbal(dep);
 					}
