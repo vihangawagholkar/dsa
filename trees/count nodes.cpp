@@ -30,6 +30,7 @@ class Tree{
 		void createTree();
 		void preorder(Node *p);
 		int count(Node *p);
+		int height(Node *p);
 
 };
 
@@ -96,6 +97,11 @@ void Tree:: preorder(Node *p){
 	}
 }
 
+//count fn. is done is postorder form
+
+// NOTE!!
+// Mostly postorder is used in binary tree
+
 int Tree:: count(Node *p){
 	
 	int x,y;
@@ -109,6 +115,21 @@ int Tree:: count(Node *p){
 
 	return 0;
 }
+
+int Tree:: height(Node *p){
+	int x=0,y=0;
+	if(p==0)
+		return 0;
+
+	x=height(p->lchild);
+	y=height(p->rchild);
+
+	if(x>y)
+		return x+1;
+	else
+		return y+1;
+
+}
 int main(){
 	//Your code here
 
@@ -116,5 +137,6 @@ int main(){
 	t.createTree();
 	t.preorder(root);
 	cout<<endl<<"No. of Nodes in Tree: "<<t.count(root);
+	cout<<endl<<"Height of Tree: "<<t.height(root);
 	return 0;
 }
