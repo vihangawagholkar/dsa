@@ -59,6 +59,45 @@ Node *RRRotation(Node *p){
 	return pr;
 }
 
+Node *LRRotation(Node *p){
+
+	Node *pl=p->lchild;
+	Node *pr=p->rchild;
+	Node *prl=pr->lchild;
+	Node *plr=pl->rchild;
+
+	pl->rchild=plr->rchild;
+	pr->lchild=plr->lchild;
+	plr->lchild=pl;
+	plr->rchild=pr;
+
+	if(root==p)
+		root=prl;
+
+	return plr;
+
+
+}
+
+Node *RLRotation(Node *p){
+
+	Node *pl=p->lchild;
+	Node *pr=p->rchild;
+	Node *prl=pr->lchild;
+	Node *plr=pl->rchild;
+
+	pl->rchild=prl->rchild;
+	pr->lchild=prl->lchild;
+	prl->lchild=pl;
+	prl->rchild=pr;
+
+	if(root==p)
+		root=prl;
+
+	return plr;
+
+
+}
 Node *RInsert(Node *p, int key){
 	Node *t;
 
@@ -84,6 +123,12 @@ Node *RInsert(Node *p, int key){
 	else if(BalanceFactor(p)==-2 && BalanceFactor(p->rchild)==-1)
 		return RRRotation(p);
 
+	else if(BalanceFactor(p)==2 && BalanceFactor(p->lchild)==-1)
+		return LRRotation(p);
+
+	else if(BalanceFactor(p)==-2 && BalanceFactor(p->rchild)==1)
+		return RLRotation(p);
+
 	return p;
 }
 
@@ -97,9 +142,9 @@ void Inorder(Node *p){
 int main(){
 	//Your code here
 	
-	root=RInsert(root,10);
-	RInsert(root,30);
+	root=RInsert(root,30);
 	RInsert(root,50);
+	RInsert(root,10);
 
 	Inorder(root);
 	return 0;
