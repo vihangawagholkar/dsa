@@ -71,6 +71,10 @@ Node *LRRotation(Node *p){
 	plr->lchild=pl;
 	plr->rchild=pr;
 
+	p->height=NodeHeight(p);
+	pl->height=NodeHeight(pl);
+	plr->height=NodeHeight(plr);
+
 	if(root==p)
 		root=prl;
 
@@ -91,10 +95,14 @@ Node *RLRotation(Node *p){
 	prl->lchild=pl;
 	prl->rchild=pr;
 
+	p->height=NodeHeight(p);
+	pr->height=NodeHeight(pr);
+	prl->height=NodeHeight(prl);
+
 	if(root==p)
 		root=prl;
 
-	return plr;
+	return prl;
 
 
 }
@@ -145,6 +153,9 @@ int main(){
 	root=RInsert(root,30);
 	RInsert(root,50);
 	RInsert(root,10);
+	RInsert(root,20);
+	RInsert(root,40);
+	RInsert(root,100);
 
 	Inorder(root);
 	return 0;
