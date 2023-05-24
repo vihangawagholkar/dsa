@@ -140,6 +140,72 @@ Node *RInsert(Node *p, int key){
 	return p;
 }
 
+Node* InPre(Node *p){
+	while(p && p->rchild)
+		p=p->rchild;
+
+	return p;
+}
+
+
+Node* InSucc(Node *p){
+	while(p && p->lchild)
+		p=p->lchild;
+
+	return p;
+}
+
+Node *Delete(Node *p, int key){
+	Node *q;
+
+	if(p==NULL)
+		return NULL;
+
+	if(p->rchild==NULL && p->lchild==NULL){
+		if(p==root)
+			root=NULL;
+
+		free(p);
+
+		return NULL;
+	}
+
+	if(key<p->data)
+		p->lchild=Delete(p->lchild,key);
+
+	else if(key>p->data)
+		p->rchild=Delete(p->rchild,key);
+
+	else{
+		if(NodeHeight(p->lchild)>NodeHeight(p->rchild)){
+			q=InPre(p->lchild);
+			p->data=q->data;
+			p->lchild=Delete(p->lchild,q->data);
+		}
+		else{
+			q=InSucc(p->rchild);
+			p->data=q->data;
+			p->rchild=Delete(p->rchild,q->data);
+		}
+	}
+
+	p->height=NodeHeight(p);
+
+	if(BalanceFactor(p)==2 && BalanceFactor(p->lchild)==1)
+		return LLRotation(p);
+
+	else if(BalanceFactor(p)==-2 && BalanceFactor(p->rchild)==-1)
+		return RRRotation(p);
+
+	else if(BalanceFactor(p)==2 && BalanceFactor(p->lchild)==-1)
+		return LRRotation(p);
+
+	else if(BalanceFactor(p)==-2 && BalanceFactor(p->rchild)==1)
+		return RLRotation(p);
+
+	return p;
+}
+
 void Inorder(Node *p){
 	if(p){
 		Inorder(p->lchild);
@@ -150,13 +216,25 @@ void Inorder(Node *p){
 int main(){
 	//Your code here
 	
-	root=RInsert(root,30);
-	RInsert(root,50);
-	RInsert(root,10);
+	root=RInsert(root,10);
 	RInsert(root,20);
-	RInsert(root,40);
-	RInsert(root,100);
+	RInsert(root,30);
 
+	RInsert(root,40);
+	Delete(root,40);
+	RInsert(root,50);
+	RInsert(root,100);
+	Delete(root,100);
+	Delete(root,20);
+	RInsert(root,60);
+	RInsert(root,30);
+
+	RInsert(root,40);
+	Delete(root,40);
+	RInsert(root,120);
+	RInsert(root,609);
+	// Delete(root,100);
+	// Delete(root,20);
 	Inorder(root);
 	return 0;
 }
