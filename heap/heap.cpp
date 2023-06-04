@@ -75,7 +75,7 @@ void Delete(int (&A)[],int n){
 	i=1,j=2*i;
 
 	while(j<n-1){
-		if(A[j+1]>A[j] && A[j+1]>A[j])
+		if(A[j+1]>A[j])
 			j=j+1;
 
 		if(A[i]<A[j]){
