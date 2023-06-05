@@ -28,21 +28,50 @@ void vInsert(vector <int> &arr,int key){
 }
 
 
-void createHeap(int (&arr)[]){
+void createHeap(int (&arr)[],int n){
 	
 
-	for(int i=2;i<8;i++){
+	for(int i=1;i<n;i++){
 		Insert(arr,i);
 	}
 
 	cout<<endl<<"The new array heap is: ";
 
-	for(int i=0;i<8;i++){
+	for(int i=0;i<n;i++){
 		cout<<arr[i]<<", ";
 	}
 
 }
 
+void heapify(int (&arr)[],int n){
+	int i,j;
+	// i=(n/2)-1;
+	
+	for(i=(n/2)-1;i>=0;i--){
+		j=2*i+1;
+		while(j<n-1){
+			if(arr[j]<arr[j+1])
+				j=j+1;
+	
+			if(arr[i]<arr[j]){
+				swap(arr[i],arr[j]);
+				
+				i=j;
+				j=2*i+1;
+			}
+	
+			else
+				break;
+			// i--;
+		}
+	}
+
+	cout<<endl<<"The new array heap is: ";
+
+	for(int i=0;i<n;i++){
+		cout<<arr[i]<<", ";
+	}
+}
 void vcreateHeap(){
 	int A[]={20,54,1,342,6,324,2,54,768,32};
 	vector <int> arr;
@@ -71,7 +100,7 @@ void Delete(int (&A)[],int n){
 	val=A[1];
 	// A[n]=NULL;
 	A[1]=A[n];
-	A[n]=val;
+	
 	i=1,j=2*i;
 
 	while(j<n-1){
@@ -88,26 +117,30 @@ void Delete(int (&A)[],int n){
 			break;
 
 	}
-
+	A[n]=val;
 	
 }
 
-void display(int arr[]){
+void display(int arr[],int n){
 	cout<<endl<<"Your array is: ";
-	for(int i=0;i<8;i++){
+	for(int i=0;i<n;i++){
 		cout<<arr[i]<<", ";
 	}
 
 }
 int main(){
 	//Your code here
-	int arr[]={0,14,15,5,20,30,8,40};
-	createHeap(arr);
+	int arr[]={5, 10, 30, 20, 35, 40, 15};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	// cout<<n<<endl;
+	// createHeap(arr,n);
 
-	for(int i=7;i>1;i--)
+	heapify(arr,n);
+
+	for(int i=n-1;i>1;i--)
 		Delete(arr,i);
 
-	display(arr);
+	display(arr,n);
 	// vcreateHeap();
 	return 0;
 }
