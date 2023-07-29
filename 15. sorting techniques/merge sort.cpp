@@ -34,6 +34,7 @@ void Merge(int A[], int l, int mid, int h){
     while (j <= h){
         B[k++] = A[j++];
     }
+
     for (int i=l; i<=h; i++){
         A[i] = B[i];
     }
@@ -62,6 +63,17 @@ void IMergeSort(int A[], int n){
 	if(p/2<n)
 		Merge(A,0,p/2-1,n-1);
 }
+		
+
+void RmergeSort(int A[], int l, int h){
+	int mid=0;
+	if(l<h){
+		mid=(l+h)/2;
+		RmergeSort(A, l, mid);
+		RmergeSort(A, mid+1, h);
+		Merge(A,l,mid,h);
+	}
+}
 
 int main(){
 	//Your code here
@@ -71,7 +83,11 @@ int main(){
 
 	// cout<<n<<endl;
 	Print(A, n, "\t\tA");
-	IMergeSort(A,n);
+
+	// IMergeSort(A,n);
+	
+	RmergeSort(A,0,n-1);
+    
     Print(A, n, "\t\tA");
 
 	return 0;
